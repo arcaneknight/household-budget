@@ -1,6 +1,6 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-import { saveMonths, loadMonths } from "../services/month.service";
+import { saveMonths, loadMonths, saveSelectedMonth, loadSelectedMonth } from "../services/month.service";
 
 import { useIncomeStore } from "./incomes";
 import { useCostsStore } from "./costs";
@@ -16,9 +16,16 @@ export const useMonthStore = defineStore("monthStore", () => {
 
   const months = ref([]);
   const selectedMonth = ref(null);
-  const setSelectedMonth = (month) => selectedMonth.value = month;
+  const setSelectedMonth = (month) => {
+    selectedMonth.value = month;
+    saveSelectedMonth(month.id);
+  }
 
-  const loadMonthsAction = async () => months.value = loadMonths();
+  const loadMonthsAction = async () => {
+    months.value = loadMonths();
+    const id = loadSelectedMonth();
+    selectedMonth.value = months.value.find((m) => m.id === id);
+  }
 
   const getMonthsForDropdown = computed(() => {
     return months.value;
@@ -55,7 +62,11 @@ export const useMonthStore = defineStore("monthStore", () => {
   };
 
   loadMonthsAction();
-  setTimeout(() => setSelectedMonth(months.value[0]), 300);
+  setTimeout(() => {
+    if(!selectedMonth.value) {
+       setSelectedMonth(months)
+    }
+  }, 300);
 
   return {
     months,

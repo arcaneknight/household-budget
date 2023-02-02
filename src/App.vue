@@ -55,15 +55,15 @@ const rightBGColor = computed(() => colorStore.rightBGColor);
 }
 
 .left-page {
-  width: 80vw;
+  width: 87vw;
   background: #DBE3E5;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 
   .left-content {
-    width: 95%;
-    height: 80vh;
+    width: 100%;
+    height: 100%;
     background: white;
     display: flex;
     padding-top: 30px;
@@ -72,7 +72,7 @@ const rightBGColor = computed(() => colorStore.rightBGColor);
 }
 
 .right-page {
-  width: 20vw;
+  width: 13vw;
   background: #809199;
   display: flex;
   justify-content: flex-start;
@@ -80,8 +80,8 @@ const rightBGColor = computed(() => colorStore.rightBGColor);
 
   .right-content {
     background: #314854;
-    width: 85%;
-    height: 80vh;
+    width: 100%;
+    height: 100%;
 
     header {
       display: flex;

@@ -10,3 +10,11 @@ export const loadMonths = () => {
     }
     return months;
 }
+
+export const saveSelectedMonth = (id) => {
+    localStorage.setItem('selected_month', id);
+}
+
+export const loadSelectedMonth = () => {
+    return localStorage.getItem('selected_month');
+}

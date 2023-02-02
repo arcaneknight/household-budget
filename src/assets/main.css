@@ -12,7 +12,7 @@ html, body, #app {
 }
 
 .dashboard-content {
-  height: calc(80vh - 80px - 4rem);
+  height: calc(100vh - 80px - 4rem);
   overflow-y: auto;
 }
 
