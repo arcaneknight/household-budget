@@ -45,6 +45,8 @@ const colorStore = useColorStore();
 
 const leftBGColor = computed(() => colorStore.leftBGColor);
 const rightBGColor = computed(() => colorStore.rightBGColor);
+
+console.log('Debug watchtower');
 </script>
 
 <style lang="scss">
