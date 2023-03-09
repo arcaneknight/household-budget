@@ -1,5 +1,5 @@
 <template>
-  <div v-if="navigationStore.getActivePage === 'overview'">
+  <div v-if="navigationStore.getActivePage === 'overview'" :style="`height: 100%`">
     <DashboardHeader>
       <template #pageName>
         <span>Guten {{greeting}}</span>

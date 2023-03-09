@@ -1,15 +1,9 @@
 <template>
   <div class="app-wrapper">
-    <div class="left-page" :style="`background-color: ${leftBGColor};`">
-      <div class="left-content">
-        <NavigationSidebar />
-        <Dashboard />
-      </div>
-    </div>
-    <div class="right-page" :style="`background-color: ${rightBGColor};`">
-      <div class="right-content">
-        <Sidebar />
-      </div>
+    <Navbar />
+    <div class="page">
+      <NavigationSidebar />
+      <Dashboard />
     </div>
   </div>
   <NewCategoryDialog />
@@ -23,11 +17,10 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
 
 import Dashboard from "./views/Dashboard.vue";
 import NavigationSidebar from './components/page/NavigationSidebar.vue';
-import Sidebar from './views/Sidebar.vue';
+import Navbar from './views/Navbar.vue';
 import NewCategoryDialog from './components/dialogs/NewCategoryDialog.vue';
 import NewMoneyEntryDialog from './components/dialogs/NewMoneyEntryDialog.vue';
 import NewCostPaymentDialog from './components/dialogs/NewCostPaymentDialog.vue';
@@ -37,60 +30,19 @@ import ConfirmDeleteDialog from './components/dialogs/ConfirmDeleteDialog.vue';
 import UserNameDialog from './components/dialogs/UserNameDialog.vue';
 import ImportDialog from './components/dialogs/ImportDialog.vue';
 
-import { useColorStore } from '@/stores/colors'; 
-
-
-
-const colorStore = useColorStore();
-
-const leftBGColor = computed(() => colorStore.leftBGColor);
-const rightBGColor = computed(() => colorStore.rightBGColor);
-
-console.log('Debug watchtower');
 </script>
 
 <style lang="scss">
 
 #app, .app-wrapper {
-  min-height: 100vh;
-  display: flex;
+  height: 100vh;
 }
 
-.left-page {
-  width: 87vw;
-  background: #DBE3E5;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  .left-content {
-    width: 100%;
-    height: 100%;
+.page {
     background: white;
     display: flex;
     padding-top: 30px;
-  }
+    height: calc(100% - 74px);
 
-}
-
-.right-page {
-  width: 13vw;
-  background: #809199;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-
-  .right-content {
-    background: #314854;
-    width: 100%;
-    height: 100%;
-
-    header {
-      display: flex;
-      justify-content: flex-start;
-      margin: 1rem 1rem 0rem 1rem;
-      color: white;
-    }
-  }
 }
 </style>

@@ -23,6 +23,7 @@ import ProfilePage from '../pages/ProfilePage.vue';
 
   #dashboard {
     width: 100%;
+    height: 100%;
     background: #fff; 
   }
 }
