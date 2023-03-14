@@ -64,6 +64,21 @@ export const useSinkingFundsStore = defineStore("sinkingFundsStore", () => {
     const getNegativeSinkingFundPaymentsForMonth = (monthId) => getSinkingFundsPaymentsForMonth(monthId).filter((sp) => sp.value < 0);
     const getNegativeSinkingFundPaymentsForMonthReduced = (monthId) => getNegativeSinkingFundPaymentsForMonth(monthId).reduce((acc, curr) => acc + curr.value, 0);
 
+    const getSinkingFundsEntriesGrouped = (sfentries) => {
+        const sinkingFundEntriesGroups = {};
+        sfentries.forEach((cd) => {
+          if (!sinkingFundEntriesGroups[cd.relatedSF]) {
+            sinkingFundEntriesGroups[cd.relatedSF] = {
+              name: cd.name,
+              value: cd.value
+            }
+          } else {
+            sinkingFundEntriesGroups[cd.relatedSF].value += cd.value;
+          }
+        });
+        return Object.values(sinkingFundEntriesGroups);
+    };
+
     const addSinkingFundPayment = (name, value, relatedSF, relatedMonth, comment, editItem = null) => {
         if (!editItem) {
             const paymentObject = {
@@ -124,6 +139,7 @@ export const useSinkingFundsStore = defineStore("sinkingFundsStore", () => {
         getPositiveSinkingFundPaymentsForMonthReduced,
         getNegativeSinkingFundPaymentsForMonth,
         getNegativeSinkingFundPaymentsForMonthReduced,
+        getSinkingFundsEntriesGrouped,
         addSinkingFundPayment,
         removeSinkingFundPaymentById,
         removeSinkingFundPaymentsByMonth,

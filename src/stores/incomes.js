@@ -13,6 +13,22 @@ export const useIncomeStore = defineStore("incomeStore", () => {
         return incomes.value.filter((inc) => inc.relatedMonth === monthId).map((inc) => ({...inc, name: getIncomeCategoryNameById(inc.relatedCategory)}));
     };
 
+    const getIncomesForMonthGrouped = (monthId) => {
+        const tmpIncomes = getIncomesForMonth(monthId);
+        const incomeGroups = {};
+        tmpIncomes.forEach((cd) => {
+            if (!incomeGroups[cd.relatedCategory]) {
+                incomeGroups[cd.relatedCategory] = {
+                name: cd.name,
+                value: cd.value
+            }
+            } else {
+                incomeGroups[cd.relatedCategory].value += cd.value;
+            }
+        });
+        return Object.values(incomeGroups);
+    };
+
     const getIncomesForMonthReduced = (monthId) => getIncomesForMonth(monthId).reduce((acc, curr) => acc + curr.value, 0);
 
     const addIncome = (name, value, relatedCategory, monthId) => {
@@ -108,6 +124,7 @@ export const useIncomeStore = defineStore("incomeStore", () => {
 
     return {
         getIncomesForMonth,
+        getIncomesForMonthGrouped,
         getIncomesForMonthReduced,
         removeIncomesByMonthId,
         getIncomeCategories,
